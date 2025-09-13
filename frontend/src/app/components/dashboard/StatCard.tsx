@@ -3,6 +3,7 @@ interface StatCardProps {
   title: string;
   value: number;
   icon: React.ElementType;
+  themeColor?: string;
   subtitle: string;
 }
 
@@ -12,6 +13,7 @@ export function StatCard({
       title, 
       value, 
       icon: Icon, 
+      themeColor,
       subtitle 
    }: StatCardProps) {
       
@@ -22,11 +24,11 @@ export function StatCard({
             <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
          </div>
          <div className="p-1 rounded-xl group-hover:scale-110 transition-transform duration-200">
-            <Icon className="h-5 w-5 text-sky-600" />
+            <Icon className={`h-5 w-5 ${themeColor ? themeColor : "text-sky-600"}`} />
          </div>
          </CardHeader>
          <CardContent className="pt-0">
-         <div className="text-3xl font-bold">{value}</div>
+         <div className={`text-3xl font-bold ${themeColor}`}>{value}</div>
          <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>
          </CardContent>
       </Card>

@@ -93,7 +93,7 @@ export default function DudiPage() {
          })
 
          if(response.data.status){
-            toast.success("Berhasil Mengubah data siswa");
+            toast.success("Berhasil Mengubah data DUDI");
          }
          const updatedSiswa = dataDudi.map(s => s.id === editingId ? response.data.data : s)
          setDataDudi(updatedSiswa);
@@ -140,14 +140,14 @@ export default function DudiPage() {
                   handleChange={handleChange}
                   handleAdd={handleAdd}
                />
-               </Card>
-               <EditDudiDialog
-               open={editDialogOpen}
-               setOpen={setEditDialogOpen}
-               data={data}
-               handleChange={handleChange}
-               handleUpdate={handleUpdate}
-               />
+            </Card>
+            <EditDudiDialog
+            open={editDialogOpen}
+            setOpen={setEditDialogOpen}
+            data={data}
+            handleChange={handleChange}
+            handleUpdate={handleUpdate}
+            />
             
          </div>
       </div>

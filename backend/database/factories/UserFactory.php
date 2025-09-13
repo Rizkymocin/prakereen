@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Guru;
+use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -44,8 +45,7 @@ class UserFactory extends Factory
                     'user_id' => $user->id,
                     'nama' => $user->name,
                     'nis' => fake()->unique()->numerify('#####'),    
-                    'kelas' => fake()->randomElement(['X', 'XI', 'XII']),
-                    'jurusan' => fake()->randomElement(['RPL', 'TKJ', 'MM', 'BC', 'OTKP', 'AKL', 'AP']),
+                    'kelas_id' => Kelas::inRandomOrder()->first()?->id ?? Kelas::factory(),
                     'alamat' => fake()->address(),
                     'telepon' => fake()->phoneNumber(),
                 ]);

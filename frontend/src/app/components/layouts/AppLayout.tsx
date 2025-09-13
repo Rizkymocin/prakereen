@@ -39,6 +39,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
          <main className="p-6 bg-slate-50 min-h-[calc(100vh-4rem)]">
             {children}
          </main>
+         <Toaster position="top-right" richColors />
       </div>
    </div>
    )

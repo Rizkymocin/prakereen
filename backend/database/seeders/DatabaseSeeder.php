@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Dudi;
+use App\Models\Jurusan;
+use App\Models\Kelas;
 use App\Models\Logbook;
 use App\Models\Magang;
 use App\Models\User;
@@ -17,6 +19,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(RolePermissionSeeder::class);
+        Jurusan::factory()->count(5)->create();
+        Kelas::factory()->count(20)->create();
         User::factory()->count(50)->withRole('siswa')->create();
         User::factory()->count(2)->withRole('guru')->create();
         Dudi::factory()->count(10)->create();

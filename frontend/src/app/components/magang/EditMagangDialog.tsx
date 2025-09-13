@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Button } from "@/components/ui/button";
 import DynamicFormFields, {FieldConfig} from "@/app/components/layouts/DynamicFormFields";
 
-export default function EditDudiDialog({ open, setOpen, data, handleChange, handleUpdate }: any) {
+export default function EditMagangDialog({ open, setOpen, data, handleChange, handleUpdate }: any) {
    
    const fields: FieldConfig[] = [
        { key: 'nama_perusahaan', label: 'Nama Perusahaan', type: 'text', placeholder: 'Masukkan nama perusahaan', required: true },

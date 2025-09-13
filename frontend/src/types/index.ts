@@ -37,6 +37,8 @@ export interface Siswa {
    id: number;
    nis: string;
    nama: string;
+   user: any;
+   kelas: any;
    kelas_id: number;
    jenis_kelamin: string;
    tanggal_lahir: string;

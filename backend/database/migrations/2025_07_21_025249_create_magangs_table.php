@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('dudi_id')->constrained('dudis');
             $table->foreignId('guru_id')->constrained('gurus');
             $table->string('status')->default('pending');
+            $table->double('nilai')->nullable()->default(null);
             $table->date('periode_mulai');
             $table->date('periode_selesai');
             $table->timestamps();
