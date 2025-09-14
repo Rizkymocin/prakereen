@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('dudis', function (Blueprint $table) {
             $table->id();
             $table->string('nama_perusahaan');
+            $table->string('bidang_usaha');
+            $table->integer('kuota');
+            $table->integer('terisi');
             $table->string('alamat');
             $table->string('telepon');
             $table->string('email');
             $table->string('penanggung_jawab');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }

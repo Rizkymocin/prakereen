@@ -6,15 +6,32 @@ import { Card } from "@/components/ui/card"
 import { useState, useEffect } from "react"
 import { Siswa } from '@/types';
 import { api } from "@/lib/api"
+import { on } from "events"
 
-export default function StudentSearch({dataSiswa, onSelect}:{dataSiswa: Siswa[], onSelect: (id:number) => void}) {
+export default function StudentSearch({
+   dataSiswa, 
+   onSelect, 
+   defaultSiswa
+}:{dataSiswa: Siswa[], 
+   onSelect: (id:number) => void, 
+   defaultSiswa?: Siswa | null
+}) {
    const [siswa, setSiswa ] = useState<Siswa[]>([]);
 
    const [query, setQuery] = useState("")
    const [filtered, setFiltered] = useState<typeof siswa>([])
    const [selectedStudent, setSelectedStudent] = useState<null | typeof siswa[0]>(null)
 
-  // filter data berdasarkan input
+   // isi default student untuk edit
+   useEffect(() => {
+      if (defaultSiswa) {
+         setSelectedStudent(defaultSiswa);
+         setQuery(defaultSiswa.nama);
+         onSelect(defaultSiswa.id);
+      }
+   }, [defaultSiswa]);
+
+   // filter data berdasarkan input
    useEffect(() => {
       if (query.trim() === "") {
          setFiltered([])
@@ -28,7 +45,6 @@ export default function StudentSearch({dataSiswa, onSelect}:{dataSiswa: Siswa[],
    }, [query])
 
    useEffect(() => {
-      console.log("DataSiswa masuk:", dataSiswa);
       setSiswa(dataSiswa);
    }, [dataSiswa]);
 
@@ -71,7 +87,7 @@ export default function StudentSearch({dataSiswa, onSelect}:{dataSiswa: Siswa[],
                      }
                      className="cursor-pointer px-2 py-2 hover:bg-accent hover:text-accent-foreground"
                      >
-                     <div className="text-md font-semibold">{siswa.nama}</div>
+                     <div className="text-md font-semibold">{siswa.id} - {siswa.nama}</div>
                      <div className="text-xs">NIS: {siswa.nis} - Kelas: {siswa.kelas.tingkat} {siswa.kelas.jurusan.jurusan} {siswa.kelas.rombel}</div>
                      </div>
                   ))}

@@ -13,7 +13,10 @@ class MagangController extends Controller
         $user = Auth::user();
         $guru = $user->guru;
 
-        $magang = Magang::with('siswa.user', 'dudi','siswa.kelas.jurusan')->where('guru_id', $guru->id)->get();
+        $magang = Magang::with('siswa.user', 'dudi','siswa.kelas.jurusan')
+                    ->where('guru_id', $guru->id)
+                    ->orderByDesc('created_at')
+                    ->get();
         $stat = [
             'totalSiswa' => $magang->count(),
             'totalAktifMagang' => $magang->where('status', 'aktif')->count(),
@@ -26,4 +29,20 @@ class MagangController extends Controller
             'data' => ['magang' => $magang, 'stat' => $stat]
         ]);
     }
+
+    public function store(Request $request)
+    {
+        $user = Auth::user();
+        $guru = $user->guru;
+
+        $data = $request->all();
+        $data['guru_id'] = $guru->id;
+        $data['status'] = 'pending'; // Set status default ke 'pending'
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil Menambahkan Data Magang',
+            'data' => Magang::create($data)
+        ]);
+    }   
 }

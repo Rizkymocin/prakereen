@@ -90,7 +90,7 @@ export default function MagangTable({
                      {row.original.dudi.nama_perusahaan}
                   </span>
                   <span className="text-xs text-gray-500">
-                     {row.original.dudi.alamat.match(/,\s*([A-Za-z\s]+)\s\d{5},/)[1]}
+                     {row.original.dudi.alamat}
                   </span>
                </div>
             </div>

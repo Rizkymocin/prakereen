@@ -16,6 +16,8 @@ export default function MagangPage() {
    const [data, setData] = useState({
          siswa: {} as any, dudi: {} as any, guru: {} as any, periode_mulai: "", periode_selesai: "", status: ""
       });
+   const [siswa, setSiswa] = useState<Siswa[]>([]);
+   const [dudi, setDudi] = useState<any[]>([]);
    const [magangStat, setMagangStat] = useState({
       totalSiswa: 0,
       totalAktifMagang: 0,
@@ -30,6 +32,16 @@ export default function MagangPage() {
    useEffect(() => {
       const fetchData = async () => {
          try {
+            const [siswaResponse, dudiResponse] = await Promise.all([
+               api.get('/siswa'),
+               api.get('/dudi')
+            ]);
+
+            console.log(siswaResponse, dudiResponse);
+            
+            setSiswa(siswaResponse.data.data);
+            setDudi(dudiResponse.data.data.dudi);
+
             const response = await api.get('/magang');
             setMagangStat(response.data.data.stat);
             setDataMagang(response.data.data.magang);
@@ -48,8 +60,8 @@ export default function MagangPage() {
    const resetForm = () =>
       setData({ siswa: "", dudi: "", guru: "", periode_mulai: "", periode_selesai: "", status: "" });
 
-   const handleAdd = async () => {
-      const res = await api.post('/dudi', {
+   const handleAdd = async () => {      
+      const res = await api.post('/magang', {
          ...data,
       });
 
@@ -147,6 +159,8 @@ export default function MagangPage() {
             open={editDialogOpen}
             setOpen={setEditDialogOpen}
             data={data}
+            allSiswa={siswa}
+            allDudi={dudi}
             handleChange={handleChange}
             handleUpdate={handleUpdate}
             />

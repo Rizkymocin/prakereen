@@ -7,13 +7,30 @@ import { useState, useEffect } from "react"
 import { Dudi, Siswa } from '@/types';
 import { api } from "@/lib/api"
 
-export default function StudentSearch({dataDudi, onSelect}:{dataDudi: Dudi[], onSelect: (id:number) => void}) {
+export default function StudentSearch({
+   dataDudi, 
+   onSelect, 
+   defaultDudi
+}:{
+   dataDudi: Dudi[], 
+   onSelect: (id:number) => void, 
+   defaultDudi?: Dudi | null
+}) {
+   
    const [dudi, setDudi ] = useState<Dudi[]>([]);
 
    const [query, setQuery] = useState("")
    const [filtered, setFiltered] = useState<typeof dudi>([])
    const [selectedDudi, setSelectedDudi] = useState<null | typeof dudi[0]>(null)
 
+   // isi default student untuk edit
+   useEffect(() => {
+      if (defaultDudi) {
+         setSelectedDudi(defaultDudi);
+         setQuery(defaultDudi.nama_perusahaan);
+         onSelect(defaultDudi.id);
+      }
+   }, [defaultDudi]);
   // filter data berdasarkan input
    useEffect(() => {
       if (query.trim() === "") {
@@ -28,7 +45,6 @@ export default function StudentSearch({dataDudi, onSelect}:{dataDudi: Dudi[], on
    }, [query])
 
    useEffect(() => {
-      console.log("DataDudi masuk:", dataDudi);
       setDudi(dataDudi);
    }, [dataDudi]);
 

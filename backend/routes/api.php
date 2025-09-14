@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DudiController;
+use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\SiswaController;
 
@@ -24,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('/dudi', DudiController::class);
     Route::apiResource('/magang', MagangController::class);
+    Route::apiResource('/logbook', LogbookController::class);
     Route::get('siswa', [SiswaController::class, 'index']);
     // Route::get('/dudi', [DudiController::class, 'index']);
 });

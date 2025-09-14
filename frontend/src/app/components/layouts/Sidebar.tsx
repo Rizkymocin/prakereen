@@ -52,8 +52,15 @@ const Sidebar = ({
          }, 1500);
       }
       onClose(); // Tutup dialog setelah logout
-   }
+   }   
    
+   function normalizePath(path: string) {
+      if (!path.startsWith("/")) {
+         path = "/" + path;
+      }
+      return path.replace(/\/$/, "") || "/";
+   }
+
    const SidebarContent = () => (
       <div className="flex h-full flex-col bg-background">
          {/* Header */}
@@ -80,9 +87,8 @@ const Sidebar = ({
          {/* Navigation */}
          <nav className="flex-1 px-4 py-6 space-y-2">
          {menuItems.map(({ href, label, description, icon: Icon}) => {
-            const isActive = href === '/'
-            ? pathname === '/'
-            : pathname.startsWith(href);
+            const currentPath = normalizePath(pathname);
+            const isActive = currentPath === normalizePath(href);
             return (
                <Link
                key={href}

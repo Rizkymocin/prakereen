@@ -14,6 +14,7 @@ class Magang extends Model
         'user_id',
         'dudi_id',
         'guru_id',
+        'siswa_id',
         'status',
         'periode_mulai',
         'periode_selesai',
