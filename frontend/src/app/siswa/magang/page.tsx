@@ -4,9 +4,26 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { User, Building2, Calendar, CheckCircle, UsersIcon } from "lucide-react"
 import { useAuthStore } from "@/stores/auth.store";
+import { useEffect, useState } from "react";
+import { api } from "@/lib/api";
+import { Siswa } from "@/types";
 
 export default function DataMagangCard() {
   const user = useAuthStore((state) => state.user);
+  const [myData, setMyData] = useState<Siswa[]>([]);
+  
+  useEffect(() => {
+
+    if (!user?.id) return;
+
+    const fetchData = async() => {
+      const res = await api.get(`/siswa_by_user/${user?.id}`);
+      setMyData(res.data.data);     
+    } 
+
+    fetchData();
+  }, [user?.id])
+
 
   return (
     <Card className="w-full shadow-md rounded-xl">
@@ -19,11 +36,11 @@ export default function DataMagangCard() {
           {/* Nama & NIS */}
           <div>
             <p className="text-gray-500">Nama Siswa</p>
-            <p className="font-semibold">{user?.name ?? "..." }</p>
+            <p className="font-semibold">{ }</p>
           </div>
           <div>
             <p className="text-gray-500">NIS</p>
-            <p className="font-semibold">2024001</p>
+            <p className="font-semibold">{}</p>
           </div>
 
           {/* Kelas & Jurusan */}

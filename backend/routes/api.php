@@ -27,5 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/magang', MagangController::class);
     Route::apiResource('/logbook', LogbookController::class);
     Route::get('siswa', [SiswaController::class, 'index']);
+    Route::get('siswa_by_user/{id}', [SiswaController::class, 'showByUser']);
     // Route::get('/dudi', [DudiController::class, 'index']);
 });

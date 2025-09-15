@@ -31,9 +31,14 @@ class SiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showByUser(string $id)
     {
-        //
+        $siswa = Siswa::with('magang.logbook','kelas.jurusan')->where('user_id', $id)->first();
+        return response()->json([
+            'status' => true,
+            'message' => "Here is your data by user",
+            'data' => $siswa
+        ]);
     }
 
     /**
