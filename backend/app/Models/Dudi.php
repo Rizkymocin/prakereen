@@ -13,9 +13,12 @@ class Dudi extends Model
     protected $fillable = [
         'nama_perusahaan',
         'alamat',
+        'kuota',
+        'bidang_usaha',
         'telepon',
         'email',
         'penanggung_jawab',
+        'deskripsi'
     ];
 
     public function magang(){{

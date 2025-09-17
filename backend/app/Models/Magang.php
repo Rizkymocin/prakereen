@@ -34,4 +34,12 @@ class Magang extends Model
     {
         return $this->belongsTo(Guru::class, 'guru_id');
     }
+
+    public function magang(){
+        return $this->belongsTo(Siswa::class);
+    }
+
+    public function logbook(){
+        return $this->hasMany(Logbook::class);
+    }
 }

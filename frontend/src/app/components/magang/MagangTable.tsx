@@ -8,8 +8,10 @@ import AddMagangDialog from "@/app/components/magang/AddMagangDialog";
 import { Badge } from "@/components/ui/badge";
 import type { DataMagang } from "@/types";
 import {Building2, Calendar, Edit, Mail, MailIcon, MapPin, Phone, Pin, Trash, Trash2, User, UserIcon } from "lucide-react";
+import { FieldConfig } from "@/app/components/layouts/DynamicFormFields";
 
 export default function MagangTable({
+   addFormFields,
    dataMagang,
    handleEdit,
    handleDelete,
@@ -19,6 +21,7 @@ export default function MagangTable({
    handleChange,
    handleAdd,
    }: {
+   addFormFields: FieldConfig[];
    dataMagang: DataMagang[];
    handleEdit: (dudi: DataMagang) => void;
    handleDelete: (id: number) => void;
@@ -175,6 +178,7 @@ export default function MagangTable({
          data={filteredMagang}
          actions={
          <AddMagangDialog
+            dynamicFormFields={addFormFields}
             open={addDialogOpen}
             setOpen={setAddDialogOpen}
             data={data}

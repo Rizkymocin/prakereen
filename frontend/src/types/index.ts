@@ -39,6 +39,7 @@ export interface Siswa {
    nama: string;
    user: any;
    kelas: any;
+   magang?: DataMagang[];
    kelas_id: number;
    jenis_kelamin: string;
    tanggal_lahir: string;
@@ -72,6 +73,8 @@ export interface Dudi {
    telepon: string;
    email: string;
    penanggung_jawab: string;
+   kuota: number,
+   bidang_usaha: string
 }
 
 export interface Guru {
@@ -91,6 +94,7 @@ export interface DataMagang {
    status: string;
    periode_mulai: string;
    periode_selesai: string;
+   nilai: string;
 }
 
 export interface DataLogbook {

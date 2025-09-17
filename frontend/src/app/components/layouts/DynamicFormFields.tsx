@@ -10,13 +10,14 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
+import type { Dudi } from "@/types";
 
 // Definisi tipe field yang didukung
 export type FieldType = 'text' | 'email' | 'number' | 'date' | 'select' | 'textarea';
 
 // Interface untuk konfigurasi field
-export interface FieldConfig {
-  key: string;
+export interface FieldConfig<T extends object = any> {
+  key: Extract<keyof T, string>;
   label: string;
   type: FieldType;
   placeholder?: string;
@@ -73,6 +74,7 @@ export default function DynamicFormFields({
           <Textarea
             value={value}
             placeholder={placeholder}
+            required={required}
             onChange={(e) => onChange(key, e.target.value)}
             rows={4}
           />
@@ -83,6 +85,7 @@ export default function DynamicFormFields({
           <Input
             type="number"
             value={value}
+            required={required}
             placeholder={placeholder}
             min={validation?.min}
             max={validation?.max}
@@ -104,6 +107,7 @@ export default function DynamicFormFields({
           <Input
             type="email"
             value={value}
+            required={required}
             placeholder={placeholder || `Masukkan ${label.toLowerCase()}`}
             onChange={(e) => onChange(key, e.target.value)}
           />
@@ -114,6 +118,7 @@ export default function DynamicFormFields({
           <Input
             type="text"
             value={value}
+            required={required}
             placeholder={placeholder || `Masukkan ${label.toLowerCase()}`}
             pattern={validation?.pattern}
             onChange={(e) => onChange(key, e.target.value)}

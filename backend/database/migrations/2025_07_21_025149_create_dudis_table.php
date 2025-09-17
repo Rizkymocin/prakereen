@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('nama_perusahaan');
             $table->string('bidang_usaha');
-            $table->integer('kuota');
-            $table->integer('terisi');
-            $table->string('alamat');
-            $table->string('telepon');
-            $table->string('email');
+            $table->integer('kuota')->default(0);
+            $table->string('alamat')->nullable();
+            $table->string('telepon')->nullable();
+            $table->string('email')->nullable();
             $table->string('penanggung_jawab');
-            $table->string('deskripsi');
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
         });
     }

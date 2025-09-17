@@ -30,6 +30,6 @@ class Siswa extends Model
     }
 
     public function magang(){
-        return $this->belongsTo(Magang::class);
+        return $this->hasMany(Magang::class);
     }
 }

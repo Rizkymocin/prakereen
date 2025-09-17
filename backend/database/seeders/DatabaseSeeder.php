@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->count(50)->withRole('siswa')->create();
         User::factory()->count(2)->withRole('guru')->create();
         Dudi::factory()->count(10)->create();
-        Magang::factory()->count(20)->create();
-        Logbook::factory()->count(30)->create(); // Pindah ke MagangSeeder
+        // Magang::factory()->count(20)->create();
+        // Logbook::factory()->count(30)->create(); // Pindah ke MagangSeeder
     }
 }

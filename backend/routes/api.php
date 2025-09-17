@@ -24,9 +24,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::apiResource('/dudi', DudiController::class);
+    Route::get('/dudi/with-magang', [DudiController::class, 'getWithMagang']);
     Route::apiResource('/magang', MagangController::class);
     Route::apiResource('/logbook', LogbookController::class);
     Route::get('siswa', [SiswaController::class, 'index']);
-    Route::get('siswa_by_user/{id}', [SiswaController::class, 'showByUser']);
+    Route::get('siswa_by_user/{id}', [SiswaController::class, 'getByUser']);
+    Route::get('siswa/magang', [SiswaController::class, 'getMagang']);
+    Route::post('siswa/daftar-dudi', [SiswaController::class, 'daftarDudi']);
     // Route::get('/dudi', [DudiController::class, 'index']);
 });

@@ -21,6 +21,7 @@ import { DialogOverlay } from "@radix-ui/react-dialog";
 import { PlusCircle } from "lucide-react";
 
 export default function AddMagangDialog({
+  dynamicFormFields,
   open,
   setOpen,
   data,
@@ -28,6 +29,7 @@ export default function AddMagangDialog({
   handleAdd,
 
 }: {
+  dynamicFormFields: FieldConfig[]
   open: boolean;
   setOpen: (v: boolean) => void;
   data: any;
@@ -43,11 +45,6 @@ export default function AddMagangDialog({
     periode_selesai: "",
     status: "",
   });
-
-  const fields: FieldConfig[] = [
-    { key: 'periode_mulai', label: 'Periode Mulai', type: 'date', placeholder: 'Masukkan nama perusahaan', required: true },
-    { key: 'periode_selesai', label: 'Periode Selesai', type: 'date', placeholder: 'Masukkan alamat perusahaan', required: true }, 
-  ]
 
   
 
@@ -90,7 +87,7 @@ export default function AddMagangDialog({
           <Label>Mitra DUDI</Label>
           <DudiSearch dataDudi={dudi} onSelect={v => handleChange("dudi_id", v)}/>
         </div>
-        <DynamicFormFields fields={fields} data={data} onChange={handleChange} />
+        <DynamicFormFields fields={dynamicFormFields} data={data} onChange={handleChange} />
         <DialogFooter>
           <Button variant="outline" onClick={() => setOpen(false)}>Batal</Button>
           <Button onClick={handleAdd}>Simpan</Button>

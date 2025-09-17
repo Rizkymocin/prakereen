@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import MagangTable from "@/app/components/magang/MagangTable";
 import EditMagangDialog from "@/app/components/magang/EditMagangDialog";
 import { toast } from "sonner";
+import { FieldConfig } from "@/app/components/layouts/DynamicFormFields";
+import getEmptyFields from "@/lib/getEmptyFields";
 
 export default function MagangPage() {
    const [dataMagang, setDataMagang] = useState<DataMagang[]>([]);
@@ -60,7 +62,17 @@ export default function MagangPage() {
    const resetForm = () =>
       setData({ siswa: "", dudi: "", guru: "", periode_mulai: "", periode_selesai: "", status: "" });
 
-   const handleAdd = async () => {      
+   const addFormFields: FieldConfig[] = [
+      { key: 'periode_mulai', label: 'Periode Mulai', type: 'date', placeholder: 'Masukkan nama perusahaan', required: true },
+      { key: 'periode_selesai', label: 'Periode Selesai', type: 'date', placeholder: 'Masukkan alamat perusahaan', required: true }, 
+   ]
+   const handleAdd = async () => {    
+      const empty = getEmptyFields(data, addFormFields)
+
+      if(empty.length > 0){
+         toast.error("Field ini perlu disii : " + empty.join(", "));
+         return;
+      }  
       const res = await api.post('/magang', {
          ...data,
       });
@@ -145,6 +157,7 @@ export default function MagangPage() {
 
             <Card className="p-4 shadow text-center">
                <MagangTable
+                  addFormFields={addFormFields}
                   dataMagang={dataMagang}
                   handleEdit={handleEdit}
                   handleDelete={handleDelete}

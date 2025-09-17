@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('siswa_id')->constrained('siswas');
             $table->foreignId('dudi_id')->constrained('dudis');
-            $table->foreignId('guru_id')->constrained('gurus');
+            $table->foreignId('guru_id')->nullable()->constrained('gurus');
             $table->string('status')->default('pending');
             $table->double('nilai')->nullable()->default(null);
-            $table->date('periode_mulai');
-            $table->date('periode_selesai');
+            $table->date('periode_mulai')->nullable();
+            $table->date('periode_selesai')->nullable();
             $table->timestamps();
         });
     }

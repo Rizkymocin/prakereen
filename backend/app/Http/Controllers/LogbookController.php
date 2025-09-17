@@ -17,7 +17,9 @@ class LogbookController extends Controller
         $guru = $user->guru;
         $logbooks = Logbook::whereHas('magang', function ($query) use ($guru) {
             $query->where('guru_id', $guru->id);
-        })->with('magang.siswa')->get();
+        })->with('magang.siswa')
+        ->orderBy('tanggal', 'ASC')
+        ->get();
 
         $stat = [
             'totalLogbook' => $logbooks->count(),

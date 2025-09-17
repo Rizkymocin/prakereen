@@ -20,7 +20,7 @@ class DudiFactory extends Factory
             'Teknologi Informasi',
             'Digital Marketing',
             'Software Development',
-            'Hardare & Networking',
+            'Hardware & Networking',
             'E-Commerce',
             'Konsultan IT',
             'Instansi Pemerintahan',
@@ -30,8 +30,7 @@ class DudiFactory extends Factory
         return [
             'nama_perusahaan' => $this->faker->company,
             'bidang_usaha' => fake()->randomElement($bidang_usaha),
-            'kuota' => $kuota = fake()->numberBetween(1,25),
-            'terisi' => fake()->numberBetween(0, $kuota),
+            'kuota' => fake()->numberBetween(1,25),
             'alamat' => $this->faker->address,
             'telepon' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->safeEmail,

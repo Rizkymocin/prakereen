@@ -109,20 +109,12 @@ export default function LoginPage() {
                {error && (
                <div className='text-sm text-red-200'>{error}</div>
                )}
-               <div className="text-center">
-                  <p className="text-sm text-cyan-500">
-                     Don't have an account?
-                     <a href="/auth/register" className="ml-1 text-cyan-500 hover:text-sky-600 font-medium">Sign up</a>
-                  </p>
-               </div>
                </div>
             </div>
          </div>
          <div className="text-center mt-8 text-sm text-gray-500">
             <p>
-               By signing in, you agree to our{' '}
-               <a href="#" className="text-cyan-500 hover:text-sky-600">Terms of Service</a> and{' '}
-               <a href="#" className="text-cyan-500 hover:text-sky-600">Privacy Policy</a>
+               Dibangun oleh <a href='https://www.github.com/Rizkymocin'  className='text-sky-600'>Rizky Mohi</a> Dibawah bimbingan <span className='text-sky-600'>PT Universal Big Data</span> dalam kegiatan Magang
             </p>
          </div>
          </div>

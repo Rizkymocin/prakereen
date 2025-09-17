@@ -8,8 +8,10 @@ import AddDudiDialog from "@/app/components/dudi/AddDudiDialog";
 
 import type { Dudi } from "@/types";
 import { Building2, Edit, Mail, MapPin, Phone, Pin, Trash, Trash2, User, UserIcon } from "lucide-react";
+import { FieldConfig } from "../layouts/DynamicFormFields";
 
 export default function DudiTable({
+   addFormFields,
    dataDudi,
    handleEdit,
    handleDelete,
@@ -19,6 +21,7 @@ export default function DudiTable({
    handleChange,
    handleAdd,
    }: {
+   addFormFields: FieldConfig[]
    dataDudi: Dudi[];
    handleEdit: (dudi: Dudi) => void;
    handleDelete: (id: number) => void;
@@ -115,6 +118,7 @@ export default function DudiTable({
          data={filteredDudi}
          actions={
          <AddDudiDialog
+            dynamicFormFields={addFormFields}
             open={addDialogOpen}
             setOpen={setAddDialogOpen}
             data={data}

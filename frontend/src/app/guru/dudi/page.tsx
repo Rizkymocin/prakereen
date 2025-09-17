@@ -10,11 +10,13 @@ import type { Dudi } from "@/types"; // pakai tipe buatanmu
 import { api } from "@/lib/api";
 import { toast } from "sonner";
 import { Building2, BuildingIcon, UserIcon } from "lucide-react";
+import { FieldConfig } from "@/app/components/layouts/DynamicFormFields";
+import getEmptyFields from "@/lib/getEmptyFields"
 
 export default function DudiPage() {
    const [dataDudi, setDataDudi] = useState<Dudi[]>([]);
    const [data, setData] = useState<Omit<Dudi, 'id' | 'created_at' | 'updated_at'>>({
-      nama_perusahaan: "", alamat: "", email: "", telepon: "", penanggung_jawab: ""
+      nama_perusahaan: "", alamat: "", email: "", kuota: 0, bidang_usaha: "", telepon: "", penanggung_jawab: ""
    });
    const [dudiStat, setDudiStat] = useState({
       totalDudi: 0,
@@ -47,9 +49,28 @@ export default function DudiPage() {
       setData((prev) => ({ ...prev, [key]: value }));
 
    const resetForm = () =>
-      setData({ nama_perusahaan: "", alamat: "", email: "", telepon: "", penanggung_jawab: ""});
+      setData({ nama_perusahaan: "", alamat: "", kuota: 0, bidang_usaha: "", email: "", telepon: "", penanggung_jawab: ""});
+
+   // Validasi field kosong
+
+   const addFormField: FieldConfig[] = [
+      { key: 'nama_perusahaan', label: 'Nama Perusahaan', type: 'text', placeholder: 'Masukkan nama perusahaan', required: true },
+      { key: 'alamat', label: 'Alamat', type: 'textarea', placeholder: 'Masukkan alamat perusahaan', required: true }, 
+      { key: 'email', label: 'Email', type: 'email', placeholder: 'Masukkan email perusahaan' },
+      { key: 'kuota', label: 'Kuota', type: 'number', placeholder: '0', required: true },
+      { key: 'bidang_usaha', label: 'Bidang Usaha', type: 'text', placeholder: 'Masukkan Bidang Usaha' },
+      { key: 'telepon', label: 'Telepon', type: 'text', placeholder: 'Masukkan nomor telepon' },
+      { key: 'penanggung_jawab', label: 'Penanggung Jawab', type: 'text', placeholder: 'Masukkan nama penanggung jawab', required: true },
+      { key: 'deskripsi', label: 'Deskripsi DUDI', type: 'textarea', placeholder: 'Tuliskan deskripsi singkat DUDI'},
+   ]
 
    const handleAdd = async () => {
+      const empty = getEmptyFields(data, addFormField)
+      if(empty.length > 0){
+         toast.error("Kolom ini perlu disii : " + empty.join(", "));
+         return;
+      }
+      
       const res = await api.post('/dudi', {
          ...data,
       });
@@ -77,6 +98,8 @@ export default function DudiPage() {
       setData({
          nama_perusahaan: dudi.nama_perusahaan,
          alamat: dudi.alamat,
+         kuota: dudi.kuota,
+         bidang_usaha: dudi.bidang_usaha,
          email: dudi.email,
          telepon: dudi.telepon,
          penanggung_jawab: dudi.penanggung_jawab,
@@ -131,6 +154,7 @@ export default function DudiPage() {
             </div>
             <Card className="p-4 shadow text-center">
                <DudiTable
+                  addFormFields={addFormField}
                   dataDudi={dataDudi}
                   handleEdit={handleEdit}
                   handleDelete={handleDelete}
